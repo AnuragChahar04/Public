@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jyoti Weds Devi Singh (Manish) - Wedding Invitation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CORE STYLES AND COLORS --- */
+        :root {
+            --color-primary-red: #d84343; /* Bright Wedding Red */
+            --color-secondary-maroon: #4a2335; /* Deep Maroon Text */
+            --color-background-cream: #f7f0e6;
+            --color-gold-accent: #ffd700;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            color: var(--color-secondary-maroon);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background-cream);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. CONTAINER & LAYOUT --- */
+        .container {
+            max-width: 800px;
+            padding: 50px 30px;
+            margin: 40px 20px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            position: relative;
+            z-index: 10; 
+            /* Subtle 3D-like Lift using Box Shadow */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 
+                        0 0 0 10px rgba(216, 67, 67, 0.1); /* Thin border highlight */
+            transform: perspective(1000px) rotateX(1deg); /* Slight 3D tilt */
+        }
+
+        /* --- 3. TYPOGRAPHY & HEADINGS --- */
+        header {
+            margin-bottom: 30px;
+        }
+        .invitation-text {
+            font-family: 'Great Vibes', cursive; /* Script font for elegance */
+            font-size: 4.5em;
+            color: var(--color-primary-red);
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .and-symbol {
+            font-size: 0.5em;
+            display: block;
+            margin: -20px 0 -10px 0;
+            color: var(--color-gold-accent);
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--color-secondary-maroon);
+            margin-top: 30px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--color-gold-accent);
+            margin: 5px auto 0;
+            border-radius: 5px;
+        }
+
+        .detail-item {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .detail-item strong {
+            color: var(--color-primary-red);
+        }
+
+        /* --- 4. SCHEDULE TABLE STYLES --- */
+        .schedule-table {
+            width: 80%;
+            margin: 20px auto 40px auto;
+            border-collapse: collapse;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        .schedule-table td {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(74, 35, 53, 0.2);
+        }
+        .schedule-table td:first-child {
+            font-weight: bold;
+            color: var(--color-primary-red);
+            padding-left: 10%;
+        }
+        .schedule-table td:last-child {
+            text-align: right;
+            padding-right: 10%;
+        }
+
+        /* --- 5. MAP BUTTON --- */
+        .map-button {
+            background-color: var(--color-primary-red);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(216, 67, 67, 0.5);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            /* Animation on hover for 3D/Lift effect */
+            animation: pulse-shadow 2s infinite alternate;
+        }
+        .map-button:hover {
+            background-color: #a03131;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(216, 67, 67, 0.7);
+        }
+        
+        @keyframes pulse-shadow {
+            from { box-shadow: 0 5px 15px rgba(216, 67, 67, 0.5); }
+            to { box-shadow: 0 8px 20px rgba(216, 67, 67, 0.8); }
+        }
+
+        /* --- 6. PETAL ANIMATION (Simulated 3D/Effect) --- */
+        .petal-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 5; /* Behind the content */
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 192, 203, 0.8); /* Light Pink */
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        /* Generate multiple animated petals with unique delays/durations */
+        .petal:nth-child(even) { background-color: rgba(255, 127, 80, 0.7); /* Coral */ }
+        .petal:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; transform: scale(0.8); }
+        .petal:nth-child(2) { left: 20%; animation-duration: 9s; animation-delay: 2s; transform: scale(1.2); }
+        .petal:nth-child(3) { left: 30%; animation-duration: 14s; animation-delay: 4s; transform: scale(0.9); }
+        .petal:nth-child(4) { left: 40%; animation-duration: 8s; animation-delay: 6s; transform: scale(1.1); }
+        .petal:nth-child(5) { left: 50%; animation-duration: 11s; animation-delay: 8s; transform: scale(0.7); }
+        .petal:nth-child(6) { left: 60%; animation-duration: 13s; animation-delay: 10s; transform: scale(1.3); }
+        .petal:nth-child(7) { left: 70%; animation-duration: 10s; animation-delay: 12s; transform: scale(0.95); }
+        .petal:nth-child(8) { left: 80%; animation-duration: 15s; animation-delay: 14s; transform: scale(1.0); }
+        .petal:nth-child(9) { left: 90%; animation-duration: 7s; animation-delay: 1s; transform: scale(0.75); }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="petal-bg">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <p style="font-size: 1em; color: var(--color-secondary-maroon);">
+                The Families of Hardhayal Singh & Balkishan
+            </p>
+            <div class="invitation-text">
+                Jyoti
+                <span class="and-symbol">&</span>
+                Devi Singh (Manish)
+            </div>
+            <p style="font-size: 1.2em; color: var(--color-primary-red); margin-top: 15px;">
+                SAVE THE DATE: Thursday, 04 December, 2025
+            </p>
+        </header>
+
+        <div class="family-section">
+            <h2>The Bride's Family</h2>
+            <div class="detail-item"><strong>Daughter of:</strong> Smt. & Sh. Hardhayal Singh</div>
+            <div class="detail-item"><strong>Grand D/o:</strong> Late Sh. Shrichand</div>
+        </div>
+
+        <div class="family-section">
+            <h2>The Groom's Family</h2>
+            <div class="detail-item"><strong>S/o:</strong> Smt. & Sh. Balkishan</div>
+            <div class="detail-item"><strong>R/o:</strong> Chaprola Teh. & Distt. Palwal (HR.)</div>
+        </div>
+
+        <h2>Golden Moments</h2>
+        <table class="schedule-table">
+            <tr>
+                <td>Baraat Arrival</td>
+                <td>5:00 PM</td>
+            </tr>
+            <tr>
+                <td>Baraat Swagt</td>
+                <td>5:30 PM</td>
+            </tr>
+            <tr>
+                <td>Dinner</td>
+                <td>6:00 PM</td>
+            </tr>
+            <tr>
+                <td>Departure of Baraat</td>
+                <td>Taro Ki Chhaon Mein</td>
+            </tr>
+        </table>
+        
+        <h2>Wedding Venue</h2>
+        <p style="font-size: 1.2em;"><strong>Dev Vatika</strong></p>
+        <p>Near Electricity Board, Deeghot</p>
+        <p>Vill. Deeghot Teh. Hodal Distt. Palwal (Hr.)</p>
+        
+        <button class="map-button" onclick="openGoogleMaps()">
+            🗺️ View Location on Google Maps
+        </button>
+    </div>
+
+    <script>
+        function openGoogleMaps() {
+            // Encode the specific venue address for accurate map search
+            const venueAddress = "Dev Vatika, Near Electricity Board, Deeghot, Hodal, Palwal, Haryana";
+            
+            // This is the standard Google Maps URL format for searching an address
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueAddress)}`;
+            
+            // Open the map in a new tab
+            window.open(googleMapsUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
