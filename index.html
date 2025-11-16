@@ -3,265 +3,643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jyoti Weds Devi Singh (Manish) - Wedding Invitation</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    
+    <title>Wedding Invitation - Jyoti & Devi Singh</title>
     <style>
-        /* --- 1. CORE STYLES AND COLORS --- */
-        :root {
-            --color-primary-red: #d84343; /* Bright Wedding Red */
-            --color-secondary-maroon: #4a2335; /* Deep Maroon Text */
-            --color-background-cream: #f7f0e6;
-            --color-gold-accent: #ffd700;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Cinzel', serif;
-            color: var(--color-secondary-maroon);
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-background-cream);
-            text-align: center;
+            font-family: 'Georgia', serif;
+            background: #1a0a0a;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
             overflow-x: hidden;
-            position: relative;
+            perspective: 1000px;
         }
 
-        /* --- 2. CONTAINER & LAYOUT --- */
-        .container {
-            max-width: 800px;
-            padding: 50px 30px;
-            margin: 40px 20px;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            border-radius: 20px;
-            position: relative;
-            z-index: 10; 
-            /* Subtle 3D-like Lift using Box Shadow */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 
-                        0 0 0 10px rgba(216, 67, 67, 0.1); /* Thin border highlight */
-            transform: perspective(1000px) rotateX(1deg); /* Slight 3D tilt */
-        }
-
-        /* --- 3. TYPOGRAPHY & HEADINGS --- */
-        header {
-            margin-bottom: 30px;
-        }
-        .invitation-text {
-            font-family: 'Great Vibes', cursive; /* Script font for elegance */
-            font-size: 4.5em;
-            color: var(--color-primary-red);
-            line-height: 1.1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .and-symbol {
-            font-size: 0.5em;
-            display: block;
-            margin: -20px 0 -10px 0;
-            color: var(--color-gold-accent);
-        }
-        h2 {
-            font-size: 1.8em;
-            color: var(--color-secondary-maroon);
-            margin-top: 30px;
-            margin-bottom: 10px;
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: var(--color-gold-accent);
-            margin: 5px auto 0;
-            border-radius: 5px;
-        }
-
-        .detail-item {
-            font-size: 1.1em;
-            margin: 10px 0;
-        }
-        .detail-item strong {
-            color: var(--color-primary-red);
-        }
-
-        /* --- 4. SCHEDULE TABLE STYLES --- */
-        .schedule-table {
-            width: 80%;
-            margin: 20px auto 40px auto;
-            border-collapse: collapse;
-            font-size: 1.1em;
-            text-align: left;
-        }
-        .schedule-table td {
-            padding: 10px 0;
-            border-bottom: 1px dashed rgba(74, 35, 53, 0.2);
-        }
-        .schedule-table td:first-child {
-            font-weight: bold;
-            color: var(--color-primary-red);
-            padding-left: 10%;
-        }
-        .schedule-table td:last-child {
-            text-align: right;
-            padding-right: 10%;
-        }
-
-        /* --- 5. MAP BUTTON --- */
-        .map-button {
-            background-color: var(--color-primary-red);
-            color: white;
-            padding: 15px 35px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(216, 67, 67, 0.5);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-            /* Animation on hover for 3D/Lift effect */
-            animation: pulse-shadow 2s infinite alternate;
-        }
-        .map-button:hover {
-            background-color: #a03131;
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(216, 67, 67, 0.7);
-        }
-        
-        @keyframes pulse-shadow {
-            from { box-shadow: 0 5px 15px rgba(216, 67, 67, 0.5); }
-            to { box-shadow: 0 8px 20px rgba(216, 67, 67, 0.8); }
-        }
-
-        /* --- 6. PETAL ANIMATION (Simulated 3D/Effect) --- */
-        .petal-bg {
-            position: absolute;
+        /* Floating particles background */
+        .particles {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 5; /* Behind the content */
             pointer-events: none;
+            z-index: 1;
         }
 
-        .petal {
+        .particle {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 192, 203, 0.8); /* Light Pink */
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ffd700, transparent);
             border-radius: 50%;
-            opacity: 0;
-            animation: fall linear infinite;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.6;
         }
 
-        /* Generate multiple animated petals with unique delays/durations */
-        .petal:nth-child(even) { background-color: rgba(255, 127, 80, 0.7); /* Coral */ }
-        .petal:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; transform: scale(0.8); }
-        .petal:nth-child(2) { left: 20%; animation-duration: 9s; animation-delay: 2s; transform: scale(1.2); }
-        .petal:nth-child(3) { left: 30%; animation-duration: 14s; animation-delay: 4s; transform: scale(0.9); }
-        .petal:nth-child(4) { left: 40%; animation-duration: 8s; animation-delay: 6s; transform: scale(1.1); }
-        .petal:nth-child(5) { left: 50%; animation-duration: 11s; animation-delay: 8s; transform: scale(0.7); }
-        .petal:nth-child(6) { left: 60%; animation-duration: 13s; animation-delay: 10s; transform: scale(1.3); }
-        .petal:nth-child(7) { left: 70%; animation-duration: 10s; animation-delay: 12s; transform: scale(0.95); }
-        .petal:nth-child(8) { left: 80%; animation-duration: 15s; animation-delay: 14s; transform: scale(1.0); }
-        .petal:nth-child(9) { left: 90%; animation-duration: 7s; animation-delay: 1s; transform: scale(0.75); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100vh) translateX(50px); }
+            50% { transform: translateY(-200vh) translateX(-50px); }
+            75% { transform: translateY(-300vh) translateX(30px); }
+        }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        .container {
+            max-width: 900px;
+            background: linear-gradient(135deg, #fff 0%, #ffe4e1 100%);
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(220, 20, 60, 0.5),
+                        0 0 100px rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            animation: containerFloat 6s infinite ease-in-out;
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        /* Animated rays background */
+        .rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: repeating-conic-gradient(
+                from 0deg,
+                transparent 0deg 8deg,
+                rgba(255, 215, 0, 0.1) 8deg 10deg
+            );
+            animation: rotate 20s linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes rotate {
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .ganesh {
+            font-size: 80px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            animation: ganeshFloat 3s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(255, 215, 0, 0.5));
+            transform-style: preserve-3d;
+        }
+
+        @keyframes ganeshFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1) rotateY(0deg);
+            }
+            25% { 
+                transform: translateY(-15px) scale(1.1) rotateY(10deg);
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.15) rotateY(-10deg);
+            }
+            75% { 
+                transform: translateY(-15px) scale(1.1) rotateY(10deg);
+            }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 64px;
+            margin-bottom: 10px;
+            font-family: 'Brush Script MT', cursive;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                         0 0 30px rgba(255, 215, 0, 0.5);
+            animation: titleGlow 2s infinite alternate;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                             0 0 30px rgba(255, 215, 0, 0.5);
+                transform: translateZ(0);
+            }
+            100% { 
+                text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                             0 0 50px rgba(255, 215, 0, 0.8),
+                             0 0 70px rgba(255, 215, 0, 0.5);
+                transform: translateZ(20px);
+            }
+        }
+
+        .save-date {
+            color: #ffe4e1;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .date {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            padding: 60px 50px;
+            position: relative;
+        }
+
+        /* 3D Floating flowers */
+        .flower {
+            position: absolute;
+            font-size: 40px;
+            animation: flower3d 8s infinite ease-in-out;
+            opacity: 0.3;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes flower3d {
+            0%, 100% { 
+                transform: translateY(0) translateX(0) rotateZ(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translateY(-30px) translateX(30px) rotateZ(90deg) scale(1.2);
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translateY(-50px) translateX(-30px) rotateZ(180deg) scale(1);
+                opacity: 0.3;
+            }
+            75% { 
+                transform: translateY(-30px) translateX(30px) rotateZ(270deg) scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        .flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .flower:nth-child(2) { top: 20%; right: 5%; animation-delay: 2s; }
+        .flower:nth-child(3) { top: 70%; left: 10%; animation-delay: 4s; }
+        .flower:nth-child(4) { top: 80%; right: 10%; animation-delay: 6s; }
+
+        .invitation-text {
+            text-align: center;
+            color: #333;
+            font-size: 19px;
+            line-height: 1.9;
+            margin-bottom: 40px;
+            animation: fadeInText 2s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes fadeInText {
+            from { 
+                opacity: 0; 
+                transform: translateZ(-50px) translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateZ(0) translateY(0);
+            }
+        }
+
+        .hosts {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInText 2.5s ease-out;
+        }
+
+        .hosts-name {
+            font-size: 26px;
+            color: #dc143c;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(220, 20, 60, 0.2);
+        }
+
+        .couple-section {
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .bride-groom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .name-box {
+            flex: 1;
+            max-width: 220px;
+            transform-style: preserve-3d;
+            animation: nameFloat 4s infinite ease-in-out;
+        }
+
+        .name-box:nth-child(1) { animation-delay: 0s; }
+        .name-box:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes nameFloat {
+            0%, 100% { 
+                transform: translateY(0) translateZ(0) rotateY(0deg);
+            }
+            50% { 
+                transform: translateY(-15px) translateZ(30px) rotateY(5deg);
+            }
+        }
+
+        .name {
+            font-size: 48px;
+            color: #dc143c;
+            font-family: 'Brush Script MT', cursive;
+            margin: 15px 0;
+            text-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+            animation: nameGlow 3s infinite alternate;
+        }
+
+        @keyframes nameGlow {
+            0% { 
+                text-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+                filter: brightness(1);
+            }
+            100% { 
+                text-shadow: 0 5px 25px rgba(220, 20, 60, 0.6),
+                             0 0 30px rgba(220, 20, 60, 0.4);
+                filter: brightness(1.2);
+            }
+        }
+
+        .relation {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .heart {
+            font-size: 50px;
+            animation: heart3d 2s infinite ease-in-out;
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 10px 20px rgba(220, 20, 60, 0.5));
+        }
+
+        @keyframes heart3d {
+            0%, 100% { 
+                transform: scale(1) rotateY(0deg) rotateZ(0deg);
+            }
+            25% { 
+                transform: scale(1.3) rotateY(180deg) rotateZ(10deg);
+            }
+            50% { 
+                transform: scale(1) rotateY(360deg) rotateZ(0deg);
+            }
+            75% { 
+                transform: scale(1.3) rotateY(540deg) rotateZ(-10deg);
+            }
+        }
+
+        .schedule {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.1),
+                        inset 0 -5px 20px rgba(220, 20, 60, 0.05);
+            animation: scheduleFloat 5s infinite ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes scheduleFloat {
+            0%, 100% { 
+                transform: translateY(0) rotateX(0deg);
+                box-shadow: 0 15px 40px rgba(220, 20, 60, 0.1),
+                            inset 0 -5px 20px rgba(220, 20, 60, 0.05);
+            }
+            50% { 
+                transform: translateY(-10px) rotateX(2deg);
+                box-shadow: 0 25px 50px rgba(220, 20, 60, 0.2),
+                            inset 0 -5px 20px rgba(220, 20, 60, 0.05);
+            }
+        }
+
+        .schedule h2 {
+            color: #dc143c;
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 30px;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 0 3px 10px rgba(220, 20, 60, 0.3);
+            animation: titleBounce 3s infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        .event {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 2px dashed #ddd;
+            animation: eventSlide 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .event:nth-child(2) { animation-delay: 0.1s; }
+        .event:nth-child(3) { animation-delay: 0.2s; }
+        .event:nth-child(4) { animation-delay: 0.3s; }
+        .event:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes eventSlide {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+
+        .event:last-child {
+            border-bottom: none;
+        }
+
+        .event-name {
+            color: #333;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .event-time {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .venue {
+            text-align: center;
+            margin: 50px 0;
+            animation: fadeInText 3s ease-out;
+        }
+
+        .venue h3 {
+            color: #dc143c;
+            font-size: 34px;
+            margin-bottom: 25px;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 0 3px 10px rgba(220, 20, 60, 0.3);
+        }
+
+        .venue-name {
+            font-size: 28px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .venue-address {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .map-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
+            animation: buttonFloat 3s infinite ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes buttonFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1) translateZ(0);
+                box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
+            }
+            50% { 
+                transform: translateY(-8px) scale(1.05) translateZ(20px);
+                box-shadow: 0 20px 40px rgba(220, 20, 60, 0.6);
+            }
+        }
+
+        .map-btn:hover {
+            transform: translateY(-5px) scale(1.08) translateZ(30px);
+            box-shadow: 0 25px 50px rgba(220, 20, 60, 0.7);
+        }
+
+        .decorative-line {
+            text-align: center;
+            margin: 40px 0;
+            color: #dc143c;
+            font-size: 28px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            color: #666;
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .lanterns {
+            position: absolute;
+            top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            font-size: 28px;
+            z-index: 3;
+        }
+
+        .lantern {
+            animation: lantern3d 4s infinite ease-in-out;
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.5));
+        }
+
+        .lantern:nth-child(1) { animation-delay: 0s; }
+        .lantern:nth-child(2) { animation-delay: 1.3s; }
+        .lantern:nth-child(3) { animation-delay: 2.6s; }
+
+        @keyframes lantern3d {
+            0%, 100% { 
+                transform: translateY(0) rotateZ(0deg) scale(1);
+            }
+            25% { 
+                transform: translateY(-15px) rotateZ(-10deg) scale(1.1);
+            }
+            50% { 
+                transform: translateY(-25px) rotateZ(10deg) scale(1.2);
+            }
+            75% { 
+                transform: translateY(-15px) rotateZ(-10deg) scale(1.1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 42px; }
+            .name { font-size: 36px; }
+            .bride-groom { flex-direction: column; gap: 20px; }
+            .content { padding: 40px 25px; }
+            .ganesh { font-size: 60px; }
+            .schedule h2 { font-size: 32px; }
         }
     </style>
 </head>
 <body>
-
-    <div class="petal-bg">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-    </div>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
 
     <div class="container">
-        <header>
-            <p style="font-size: 1em; color: var(--color-secondary-maroon);">
-                The Families of Hardhayal Singh & Balkishan
-            </p>
-            <div class="invitation-text">
-                Jyoti
-                <span class="and-symbol">&</span>
-                Devi Singh (Manish)
+        <div class="header">
+            <div class="rays"></div>
+            <div class="lanterns">
+                <span class="lantern">🏮</span>
+                <span class="lantern">🏮</span>
+                <span class="lantern">🏮</span>
             </div>
-            <p style="font-size: 1.2em; color: var(--color-primary-red); margin-top: 15px;">
-                SAVE THE DATE: Thursday, 04 December, 2025
-            </p>
-        </header>
-
-        <div class="family-section">
-            <h2>The Bride's Family</h2>
-            <div class="detail-item"><strong>Daughter of:</strong> Smt. & Sh. Hardhayal Singh</div>
-            <div class="detail-item"><strong>Grand D/o:</strong> Late Sh. Shrichand</div>
+            <div class="ganesh">🕉️</div>
+            <h1>Wedding</h1>
+            <div class="save-date">Save The Date</div>
+            <div class="date">Thursday, 04 December 2025</div>
         </div>
 
-        <div class="family-section">
-            <h2>The Groom's Family</h2>
-            <div class="detail-item"><strong>S/o:</strong> Smt. & Sh. Balkishan</div>
-            <div class="detail-item"><strong>R/o:</strong> Chaprola Teh. & Distt. Palwal (HR.)</div>
+        <div class="content">
+            <div class="flower">🌸</div>
+            <div class="flower">🌺</div>
+            <div class="flower">🌸</div>
+            <div class="flower">🌺</div>
+
+            <div class="invitation-text">
+                With new dreams, new hopes, new aspirations and desire to achieve<br>
+                new horizons, they are stepping into new beginning of wedding life
+            </div>
+
+            <div class="hosts">
+                <div class="hosts-name">Smt. & Sh. Hardhayal Singh</div>
+                <p style="color: #666;">cordially invite you to the wedding ceremony of their beloved daughter</p>
+            </div>
+
+            <div class="couple-section">
+                <div class="bride-groom">
+                    <div class="name-box">
+                        <div class="name">Jyoti</div>
+                        <div class="relation">(Grand D/o Late Sh. Shrichand)</div>
+                    </div>
+                    <div class="heart">❤️</div>
+                    <div class="name-box">
+                        <div class="name">Manish Singh</div>
+                        <!-- <div class="relation">(Manish)</div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="decorative-line">✦ ❖ ✦</div>
+
+            <div class="schedule">
+                <h2>Golden Moments</h2>
+                <div class="event">
+                    <span class="event-name">Barat Swagt</span>
+                    <span class="event-time">5:00 PM</span>
+                </div>
+                <div class="event">
+                    <span class="event-name">Dinner</span>
+                    <span class="event-time">5:30 PM</span>
+                </div>
+            </div>
+
+            <div class="venue">
+                <h3>Wedding Venue</h3>
+                <div class="venue-name">Dev Vatika</div>
+                <div class="venue-address">
+                    Near Electricity Board<br>
+                    Deeghot, Teh. Hodal<br>
+                    Distt. Palwal (HR.)
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Dev+Vatika+Near+Electricity+Board+Deeghot+Hodal+Palwal+Haryana" 
+                   target="_blank" 
+                   class="map-btn">
+                    📍 Get Directions
+                </a>
+            </div>
+
+            <div class="decorative-line">✦ ❖ ✦</div>
         </div>
 
-        <h2>Golden Moments</h2>
-        <table class="schedule-table">
-            <tr>
-                <td>Baraat Arrival</td>
-                <td>5:00 PM</td>
-            </tr>
-            <tr>
-                <td>Baraat Swagt</td>
-                <td>5:30 PM</td>
-            </tr>
-            <tr>
-                <td>Dinner</td>
-                <td>6:00 PM</td>
-            </tr>
-            <tr>
-                <td>Departure of Baraat</td>
-                <td>Taro Ki Chhaon Mein</td>
-            </tr>
-        </table>
-        
-        <h2>Wedding Venue</h2>
-        <p style="font-size: 1.2em;"><strong>Dev Vatika</strong></p>
-        <p>Near Electricity Board, Deeghot</p>
-        <p>Vill. Deeghot Teh. Hodal Distt. Palwal (Hr.)</p>
-        
-        <button class="map-button" onclick="openGoogleMaps()">
-            🗺️ View Location on Google Maps
-        </button>
+        <div class="footer">
+            Taaron Se Sajaya Hai, Phoolon Se Malikaya Hai,<br>
+            Bade Door Se Mangwaya Hai, Tara Muskurao Koi Aadha<br>
+            Bhaa Ki Shadi Ka Card Bhijwaya Hai
+        </div>
     </div>
 
     <script>
-        function openGoogleMaps() {
-            // Encode the specific venue address for accurate map search
-            const venueAddress = "Dev Vatika, Near Electricity Board, Deeghot, Hodal, Palwal, Haryana";
-            
-            // This is the standard Google Maps URL format for searching an address
-            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueAddress)}`;
-            
-            // Open the map in a new tab
-            window.open(googleMapsUrl, '_blank');
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
         }
     </script>
 </body>
