@@ -14,8 +14,6 @@
         body {
             font-family: 'Georgia', serif;
             overflow: hidden;
-            background: #000;
-            color: #fff;
         }
 
         .slide-container {
@@ -25,7 +23,7 @@
         }
 
         .slide {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -35,27 +33,22 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 1.2s ease-in-out, visibility 0s 1.2s;
+            transition: opacity 1.5s ease-in-out;
             padding: 40px;
+            z-index: 1;
         }
 
         .slide.active {
             opacity: 1;
-            visibility: visible;
-            transition: opacity 1.2s ease-in-out, visibility 0s 0s;
-            z-index: 10;
+            z-index: 2;
         }
 
         /* Slide 1 - Ganesh Ji */
-        .slide-1 {
+        #slide1 {
             background: radial-gradient(circle at center, #ff9966, #ff5e62, #8b0000);
-            position: relative;
-            overflow: hidden;
         }
 
-        .slide-1::before {
-            content: '';
+        .rotating-bg {
             position: absolute;
             width: 200%;
             height: 200%;
@@ -70,15 +63,17 @@
             to { transform: rotate(360deg); }
         }
 
-        .ganesh-container {
+        .content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            text-align: center;
+            color: white;
         }
 
         .ganesh-symbol {
             font-size: 180px;
             text-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 215, 0, 0.4);
-            animation: pulse 3s ease-in-out infinite, float 4s ease-in-out infinite;
+            animation: pulse 3s ease-in-out infinite;
             filter: drop-shadow(0 10px 30px rgba(255, 215, 0, 0.5));
         }
 
@@ -87,46 +82,48 @@
             50% { transform: scale(1.05); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
         .mandala {
             position: absolute;
-            width: 600px;
-            height: 600px;
             border: 3px solid rgba(255, 215, 0, 0.3);
             border-radius: 50%;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
             animation: spin 30s linear infinite;
         }
 
-        .mandala:nth-of-type(2) {
+        .mandala1 {
+            width: 600px;
+            height: 600px;
+            margin-left: -300px;
+            margin-top: -300px;
+        }
+
+        .mandala2 {
             width: 500px;
             height: 500px;
+            margin-left: -250px;
+            margin-top: -250px;
             animation: spin 25s linear infinite reverse;
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .mandala:nth-of-type(3) {
+        .mandala3 {
             width: 400px;
             height: 400px;
+            margin-left: -200px;
+            margin-top: -200px;
             animation: spin 20s linear infinite;
             border-color: rgba(255, 215, 0, 0.4);
         }
 
         @keyframes spin {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .shloka-text {
             font-size: 32px;
             margin-top: 60px;
-            text-align: center;
             text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             line-height: 1.8;
             max-width: 800px;
@@ -138,48 +135,12 @@
             color: #ffd700;
         }
 
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 215, 0, 0.6);
-            border-radius: 50%;
-            animation: particleFloat 15s infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) scale(1);
-                opacity: 0;
-            }
-        }
-
         /* Slide 2 - Names */
-        .slide-2 {
+        #slide2 {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
         }
 
-        .slide-2::before {
-            content: '';
+        .dots-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -192,12 +153,6 @@
         @keyframes bgScroll {
             from { transform: translateY(0); }
             to { transform: translateY(100px); }
-        }
-
-        .names-3d {
-            perspective: 1000px;
-            position: relative;
-            z-index: 2;
         }
 
         .wedding-header {
@@ -214,23 +169,15 @@
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             padding: 50px 80px;
-            margin: 40px 0;
-            transform-style: preserve-3d;
+            margin: 40px auto;
+            max-width: 600px;
             animation: cardFloat 4s ease-in-out infinite;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .name-card:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
         @keyframes cardFloat {
-            0%, 100% {
-                transform: translateY(0) rotateX(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotateX(5deg);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .bride-name, .groom-name {
@@ -269,15 +216,8 @@
         }
 
         /* Slide 3 - Events */
-        .slide-3 {
+        #slide3 {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            position: relative;
-        }
-
-        .events-3d {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
         }
 
         .events-title {
@@ -301,17 +241,12 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
             padding: 35px 50px;
-            margin: 25px 0;
+            margin: 25px auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .event-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
         }
 
         .event-title {
@@ -327,13 +262,11 @@
         }
 
         /* Slide 4 - Venue */
-        .slide-4 {
+        #slide4 {
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            position: relative;
         }
 
-        .slide-4::after {
-            content: '';
+        .glow-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -341,13 +274,6 @@
             bottom: 0;
             background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 50%);
-        }
-
-        .venue-3d {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
         }
 
         .venue-icon {
@@ -391,8 +317,9 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
             padding: 40px;
-            margin: 50px 0;
+            margin: 50px auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
         }
 
         .save-date-final {
@@ -401,62 +328,48 @@
             font-style: italic;
             margin-top: 40px;
             text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        /* Scroll Indicator */
         .scroll-hint {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.9);
             z-index: 100;
             animation: hintBounce 2s infinite;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+            transition: opacity 0.5s;
         }
 
         @keyframes hintBounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .ganesh-symbol { font-size: 120px; }
+            .ganesh-symbol { font-size: 100px; }
             .shloka-text { font-size: 20px; }
             .hindi { font-size: 28px; }
-            .bride-name, .groom-name { font-size: 48px; }
+            .bride-name, .groom-name { font-size: 42px; }
             .name-card { padding: 30px 40px; }
             .events-title { font-size: 42px; }
             .venue-name { font-size: 42px; }
-            .event-card { flex-direction: column; gap: 15px; }
+            .event-card { flex-direction: column; gap: 15px; padding: 25px 30px; }
         }
     </style>
 </head>
 <body>
     <div class="slide-container">
         <!-- Slide 1: Ganesh Ji -->
-        <div class="slide slide-1 active">
-            <div class="mandala"></div>
-            <div class="mandala"></div>
-            <div class="mandala"></div>
-            <div class="particles">
-                <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-                <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
-                <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
-                <div class="particle" style="left: 70%; animation-delay: 1s;"></div>
-                <div class="particle" style="left: 90%; animation-delay: 3s;"></div>
-            </div>
-            <div class="ganesh-container">
+        <div class="slide active" id="slide1">
+            <div class="rotating-bg"></div>
+            <div class="mandala mandala1"></div>
+            <div class="mandala mandala2"></div>
+            <div class="mandala mandala3"></div>
+            <div class="content">
                 <div class="ganesh-symbol">🕉️</div>
                 <div class="shloka-text">
                     <div class="hindi">॥ श्री गणेशाय नमः ॥</div>
@@ -467,8 +380,9 @@
         </div>
 
         <!-- Slide 2: Names -->
-        <div class="slide slide-2">
-            <div class="names-3d">
+        <div class="slide" id="slide2">
+            <div class="dots-bg"></div>
+            <div class="content">
                 <div class="wedding-header">WEDDING INVITATION</div>
                 
                 <div class="name-card">
@@ -489,8 +403,8 @@
         </div>
 
         <!-- Slide 3: Events -->
-        <div class="slide slide-3">
-            <div class="events-3d">
+        <div class="slide" id="slide3">
+            <div class="content" style="max-width: 900px;">
                 <div class="events-title">Golden Moments</div>
                 <div class="date-display">Thursday, 04th December 2025</div>
                 
@@ -504,15 +418,16 @@
                     <div class="event-time">6:00 PM</div>
                 </div>
                 
-                <div style="margin-top: 50px; font-size: 22px; text-align: center; font-style: italic; color: rgba(255,255,255,0.9); text-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                <div style="margin-top: 50px; font-size: 22px; text-align: center; font-style: italic; color: rgba(255,255,255,0.95); text-shadow: 0 2px 5px rgba(0,0,0,0.3);">
                     "Stepping into a new beginning with dreams, hopes & aspirations"
                 </div>
             </div>
         </div>
 
         <!-- Slide 4: Venue -->
-        <div class="slide slide-4">
-            <div class="venue-3d">
+        <div class="slide" id="slide4">
+            <div class="glow-bg"></div>
+            <div class="content" style="max-width: 800px;">
                 <div class="venue-icon">🏛️</div>
                 <div class="venue-title">Wedding Venue</div>
                 
@@ -535,76 +450,78 @@
         </div>
     </div>
 
-    <div class="scroll-hint">↓ Scroll to continue ↓</div>
+    <div class="scroll-hint" id="scrollHint">↓ Scroll to continue ↓</div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
+        const scrollHint = document.getElementById('scrollHint');
         let isScrolling = false;
 
-        function changeSlide(direction) {
-            if (isScrolling) return;
-            isScrolling = true;
-
-            slides[currentSlide].classList.remove('active');
-
-            currentSlide += direction;
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides || isScrolling) return;
             
-            if (currentSlide < 0) currentSlide = 0;
-            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-
-            slides[currentSlide].classList.add('active');
-
-            // Update scroll hint visibility
-            const scrollHint = document.querySelector('.scroll-hint');
-            if (currentSlide === totalSlides - 1) {
-                scrollHint.style.opacity = '0';
-            } else {
-                scrollHint.style.opacity = '1';
-            }
-
+            isScrolling = true;
+            
+            // Remove active from all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Add active to target slide
+            slides[index].classList.add('active');
+            
+            currentSlide = index;
+            
+            // Hide scroll hint on last slide
+            scrollHint.style.opacity = (currentSlide === totalSlides - 1) ? '0' : '1';
+            
             setTimeout(() => {
                 isScrolling = false;
-            }, 1200);
+            }, 1500);
         }
 
-        let touchStartY = 0;
-        let touchEndY = 0;
-
-        document.addEventListener('wheel', (e) => {
+        // Wheel event
+        let wheelTimeout;
+        window.addEventListener('wheel', (e) => {
             e.preventDefault();
-            if (e.deltaY > 0) {
-                changeSlide(1);
-            } else {
-                changeSlide(-1);
-            }
+            
+            clearTimeout(wheelTimeout);
+            wheelTimeout = setTimeout(() => {
+                if (e.deltaY > 0) {
+                    goToSlide(currentSlide + 1);
+                } else {
+                    goToSlide(currentSlide - 1);
+                }
+            }, 50);
         }, { passive: false });
 
-        document.addEventListener('touchstart', (e) => {
+        // Touch events
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
         });
 
-        document.addEventListener('touchend', (e) => {
-            touchEndY = e.changedTouches[0].clientY;
+        window.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
             const diff = touchStartY - touchEndY;
             
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
-                    changeSlide(1);
+                    goToSlide(currentSlide + 1);
                 } else {
-                    changeSlide(-1);
+                    goToSlide(currentSlide - 1);
                 }
             }
         });
 
-        document.addEventListener('keydown', (e) => {
+        // Keyboard events
+        window.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowDown' || e.key === 'PageDown') {
                 e.preventDefault();
-                changeSlide(1);
+                goToSlide(currentSlide + 1);
             } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
                 e.preventDefault();
-                changeSlide(-1);
+                goToSlide(currentSlide - 1);
             }
         });
     </script>
