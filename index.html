@@ -66,6 +66,17 @@
             animation: float 3s ease-in-out infinite;
         }
 
+        .mandala-decoration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .mandala-tl { top: -50px; left: -50px; }
+        .mandala-br { bottom: -50px; right: -50px; transform: rotate(180deg); }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -445,7 +456,7 @@
                     Manish
                 </div>
                 
-                <p class="parent-info">Son of Manish</p>
+                <p class="parent-info"></p>
                 
                 <p class="quote">
                     Two souls with but a single thought,<br/>two hearts that beat as one
@@ -499,6 +510,12 @@
                     <div class="venue-footer">
                         Save the date and join us in celebrating this beautiful union
                     </div>
+                    
+                    <a href="https://www.google.com/maps/search/?api=1&query=Dev+Vatika+Near+Electricity+Board+Deeghot+Hodal+Palwal" 
+                       target="_blank" 
+                       class="directions-btn">
+                        📍 Get Directions
+                    </a>
                 </div>
                 
                 <div style="margin-top: 40px; font-size: 50px;">❤️</div>
