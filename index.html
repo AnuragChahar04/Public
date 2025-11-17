@@ -316,6 +316,32 @@
             font-style: italic;
         }
 
+        .directions-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d81b60 0%, #c2185b 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        .directions-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(216, 27, 96, 0.4);
+            background: linear-gradient(135deg, #c2185b 0%, #ad1457 100%);
+        }
+
+        .directions-btn:active {
+            transform: translateY(0);
+        }
+
         /* Progress Dots */
         .progress-dots {
             position: fixed;
@@ -402,8 +428,8 @@
                 <div class="heart-icon">❤️</div>
                 <h2 class="couple-title">Together with their families</h2>
                 
-                <p style="font-size: 20px; color: #666; margin-bottom: 10px;">Daughter of</p>
-                <p class="parent-name">Smt. & Sh. Hardhayal Singh</p>
+                <p class="parent-info">Daughter of</p>
+                <p class="parent-name">Smt. &amp; Sh. Hardhayal Singh</p>
                 
                 <div class="bride-groom-name animate__animated animate__heartBeat animate__slower animate__infinite">
                     Jyoti
@@ -419,10 +445,10 @@
                     Manish
                 </div>
                 
-                <p style="font-size: 20px; color: #666; margin-top: 10px;">Son of Manish</p>
+                <p class="parent-info">Son of Manish</p>
                 
                 <p class="quote">
-                    "Two souls with but a single thought,<br/>two hearts that beat as one"
+                    Two souls with but a single thought,<br/>two hearts that beat as one
                 </p>
             </div>
         </div>
